@@ -1,5 +1,7 @@
 package service;
 
+import lombok.Value;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -27,8 +29,9 @@ public class DataGenerator {
     }
 
     public static String generateName(String locale) {
-        // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
-        // использовать Faker
+        Faker faker = new Faker(new Locale("ru"));
+        String name = faker.name().fullName();
+
         return name;
     }
 
@@ -57,4 +60,3 @@ public class DataGenerator {
     }
 }
 
-}
