@@ -1,5 +1,6 @@
 package service;
 
+import com.github.javafaker.Faker;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -10,9 +11,10 @@ public class DataGenerator {
     private DataGenerator() {
 
     }
-    public static String generateDate(int days) {
 
-        String date = LocalDate.now().plusDays(days).
+    public static String generateDate(int addDays) {
+
+        String date = LocalDate.now().plusDays(addDays).
                 format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         return date;
     }

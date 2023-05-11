@@ -38,36 +38,28 @@ public class DeliveryCardTest {
         $("[data-test-id=city] input").setValue(validUser.getCity());
         $(".calendar-input input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $(".calendar-input input").setValue(firstMeetingDate);
-        $("[data-test-id=name]").setValue(validUser.getName());
-        $("[data-test-id=phone]").setValue(validUser.getPhone());
+        $("[data-test-id=name] input").setValue(validUser.getName());
+        $("[data-test-id=phone] input").setValue(validUser.getPhone());
         $("[data-test-id=agreement]").click();
-        $$("button").find(exactText("Запланировать")).click();
-        $(withText("Успешно!")).waitUntil(Condition.visible, 15000);
-        $("[data-test-id=notification]")
+        $(".button").click();
+        $(withText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(30));
+        $("[data-test-id=success-notification] .notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate),
                         Duration.ofSeconds(15));
+
+        //
 
         $(".calendar-input input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $(".calendar-input input").setValue(secondMeetingDate);
         $$("button").find(exactText("Запланировать")).click();
-        $(withText("Успешно!")).waitUntil(Condition.visible, 15000);
+        $(withText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(30));
         $("[data-test-id=replan-notification]")
                 .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"),
                         Duration.ofSeconds(15));
         $(withText("Перепланировать")).click();
-//
-        $("[data-test-id=success-notification]")
+        $("[data-test-id=success-notification] .notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + secondMeetingDate),
                         Duration.ofSeconds(15));
-
-
-
-
-
-
-
-
-
 
     }
 }
